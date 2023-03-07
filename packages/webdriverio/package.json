@@ -1,0 +1,31 @@
+{
+  "name": "@rbnx/webdriverio",
+  "version": "0.0.1",
+  "description": "webdriverio plugin for nx",
+  "author": "Richard Roozenboom",
+  "license": "MIT",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/roozenboom/rbnx",
+    "directory": "packages/webdriverio"
+  },
+  "bugs": {
+    "url": "https://github.com/roozenboom/rbnx/issues"
+  },
+  "keywords": [
+    "nrwl",
+    "nx",
+    "nx plugin",
+    "monorepo",
+    "e2e",
+    "testing",
+    "webdriverio",
+    "wdio"
+  ],
+  "main": "index.js",
+  "generators": "./generators.json",
+  "executors": "./executors.json",
+  "peerDependencies": {
+    "@wdio/cli": "^8.3.0"
+  }
+}

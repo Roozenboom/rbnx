@@ -1,0 +1,15 @@
+{
+  "extends": "<%= offsetFromRoot %>tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "types": [
+      "node", 
+      "@wdio/globals/types", 
+      <% if(wdioFrameworkType) { %>"<%= wdioFrameworkType %>", <% } %>
+      <% wdioServiceTypes.forEach(function(service) { %>"<%= service %>", <% }) %>
+    ]
+  },
+  "include": [
+    "**/*.ts",
+  ]
+}

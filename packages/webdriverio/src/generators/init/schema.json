@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "NxWdioInit",
+  "title": "Add WebdriverIO configuration to the workspace",
+  "type": "object",
+  "properties": {
+    "runner": {
+      "description": "Adds the specified wdio test runner",
+      "type": "string",
+      "enum": ["local", "none"],
+      "default": "local"
+    },
+    "framework": {
+      "description": "Adds the specified wdio test framework",
+      "type": "string",
+      "enum": ["mocha", "jasmine", "none"],
+      "default": "jasmine"
+    },
+    "reporters": {
+      "description": "Adds the specified wdio reporter",
+      "type": "array",
+      "enum": ["allure", "concise", "dot", "junit", "spec", "none"],
+      "default": ["spec"]
+    },
+    "services": {
+      "description": "Adds the specified wdio service",
+      "type": "array",
+      "enum": ["devtools", "selenium-standalone", "none"]
+    },
+    "protocol": {
+      "description": "The automation protocol to use with WebdriverIO",
+      "type": "string",
+      "enum": ["webdriver", "devtools"],
+      "x-prompt": "Which automation protocol do you want to use?"
+    },
+    "skipFormat": {
+      "type": "boolean",
+      "description": "Skip formatting files",
+      "default": false
+    }
+  }
+}

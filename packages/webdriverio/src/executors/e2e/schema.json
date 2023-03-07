@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "cli": "nx",
+  "title": "Webdriverio e2e test executor",
+  "description": "Runs e2e test with Webdriverio",
+  "type": "object",
+  "properties": {
+    "specs": {
+      "type": "array",
+      "description": "Define which test specs should run. The pattern is relative to the directory of the configuration file being run.",
+      "default": ["src/e2e/**/*.spec.ts"]
+    },
+    "spec": {
+      "type": "string",
+      "description": "Run a single spec."
+    },
+    "exclude": {
+      "type": "array",
+      "description": "Exclude spec file(s) from a run."
+    },
+    "suites": {
+      "type": "object",
+      "description": "Group test specs in suites and run single specific suites instead of all of them. (see also 'suite')",
+      "patternProperties": {
+        ".+": {
+          "type": "array",
+          "description": "Define which test specs should run for this suite. The pattern is relative to the directory of the configuration file being run."
+        }
+      }
+    },
+    "suite": {
+      "type": "string",
+      "description": "Run a single suite."
+    },
+    "maxInstances": {
+      "type": "number",
+      "description": "maxInstances handles how many capabilities from the same test should run tests."
+    },
+    "maxInstancesPerCapability": {
+      "type": "number",
+      "description": "maxInstancesPerCapability sets a limit to run tests with a specific capability"
+    },
+    "browsers": {
+      "type": "array",
+      "description": "A list of browsers (capabilities) you like to run your tests on.",
+      "enum": ["chrome", "firefox", "edge"]
+    },
+    "headless": {
+      "type": "boolean",
+      "description": "Run capability in headless mode."
+    },
+    "logLevel": {
+      "type": "string",
+      "description": "Level of logging verbosity.",
+      "enum": ["trace", "debug", "info", "warn", "error", "silent"]
+    },
+    "outputDir": {
+      "type": "string",
+      "description": "The output directory for the logs, relative to the root configuration of your project.",
+      "default": "./tmp"
+    },
+    "bail": {
+      "type": "number",
+      "description": "If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests)."
+    },
+    "baseUrl": {
+      "type": "string",
+      "description": "The address (with the port) which your application is running on."
+    },
+    "waitforTimeout": {
+      "type": "number",
+      "description": "Default timeout for all waitForXXX commands."
+    },
+    "framework": {
+      "type": "string",
+      "description": "Framework you want to run your specs with.",
+      "enum": ["mocha", "jasmine"]
+    },
+    "specFileRetries": {
+      "type": "number",
+      "description": "The number of times to retry the entire specfile when it fails."
+    },
+    "wdioConfig": {
+      "type": "string",
+      "description": "The path to the wdio config file."
+    },
+    "devServerTarget": {
+      "type": "string",
+      "description": "Target to serve the application to run e2e tests against."
+    },
+    "skipServe": {
+      "type": "boolean",
+      "description": "Skip dev server target execution.",
+      "default": false
+    }
+  },
+  "required": []
+}

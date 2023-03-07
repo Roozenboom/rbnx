@@ -1,0 +1,57 @@
+name: Bug Report
+description: Create a report to help us improve!
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: Current Behavior
+      description: 'A clear and concise description of what is currently happening.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behaviour
+    attributes:
+      description: 'How is the expected behavior different from what is currently happening?'
+      label: Expected Behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Please provide some instructions to reproduce the issue. Be as detailed as possible.
+      value: |
+        1.
+    validations:
+      required: true
+
+  - type: textarea
+    id: nx-report
+    attributes:
+      label: Nx Report
+      description: Please paste the contents shown by `nx report`. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Failure Logs
+      description: Please include any relevant log snippets or files here. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional Information
+      description: 'Is there any additional information that you can provide?'
+    validations:
+      required: false

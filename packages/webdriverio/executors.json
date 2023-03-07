@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "executors": {
+    "e2e": {
+      "implementation": "./src/executors/e2e/executor",
+      "schema": "./src/executors/e2e/schema.json",
+      "description": "Webdriverio e2e test executor"
+    }
+  }
+}

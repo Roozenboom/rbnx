@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo
+echo "\033[1mLint commit messages\033[0m"
+npx --no -- commitlint --edit $1 -V
+echo

@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "NxWdioProject",
+  "title": "Add a WebdriverIO e2e project",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the frontend project to test",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "tags": {
+      "type": "string",
+      "description": "Add tags to the project (used for linting).",
+      "alias": "t"
+    },
+    "specs": {
+      "type": "array",
+      "description": "Define which test specs should run. The pattern is relative to the directory of the configuration file being run.",
+      "default": ["src/e2e/**/*.spec.ts"]
+    },
+    "exclude": {
+      "type": "array",
+      "description": "Exclude spec file(s) from a run."
+    },
+    "maxInstances": {
+      "type": "number",
+      "description": "maxInstances handles how many capabilities from the same test should run tests."
+    },
+    "maxInstancesPerCapability": {
+      "type": "number",
+      "description": "maxInstancesPerCapability sets a limit to run tests with a specific capability"
+    },
+    "browsers": {
+      "type": "array",
+      "description": "A list of browsers (capabilities) you like to run your tests on.",
+      "enum": ["chrome", "firefox", "edge"]
+    },
+    "headless": {
+      "type": "boolean",
+      "description": "Run capability in headless mode."
+    },
+    "logLevel": {
+      "type": "string",
+      "description": "Level of logging verbosity.",
+      "enum": ["trace", "debug", "info", "warn", "error", "silent"]
+    },
+    "outputDir": {
+      "type": "string",
+      "description": "The output directory for the logs, relative to the root configuration of your project.",
+      "default": "./tmp"
+    },
+    "bail": {
+      "type": "number",
+      "description": "If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests)."
+    },
+    "baseUrl": {
+      "type": "string",
+      "description": "The address (with the port) which your application is running on."
+    },
+    "waitforTimeout": {
+      "type": "number",
+      "description": "Default timeout for all waitForXXX commands."
+    },
+    "framework": {
+      "type": "string",
+      "description": "Framework you want to run your specs with.",
+      "enum": ["mocha", "jasmine"]
+    },
+    "specFileRetries": {
+      "type": "number",
+      "description": "The number of times to retry the entire specfile when it fails."
+    },
+    "autoConfig": {
+      "type": "boolean",
+      "description": "Auto generate wdio configuration.",
+      "default": true
+    },
+    "skipFormat": {
+      "type": "boolean",
+      "description": "Skip formatting files.",
+      "default": false
+    }
+  },
+  "required": ["project"]
+}

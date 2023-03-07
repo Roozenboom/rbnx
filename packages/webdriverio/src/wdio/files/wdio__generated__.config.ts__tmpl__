@@ -1,0 +1,24 @@
+import type { Options } from '@wdio/types';
+import { wdioConfig } from '<%= offsetFromRoot %>wdio.base.config';
+
+export const config: Options.Testrunner = {
+  ...wdioConfig,
+  autoCompileOpts: {
+    tsNodeOpts: {
+      transpileOnly: true,
+      project: './tsconfig.json',
+    },
+  },<% 
+  if(options.specs) { %>specs: ['<%= options.specs %>'],<% } %><%
+  if(options.exclude) { %>exclude: ['<%= options.exclude %>'],<% } %><%
+  if(options.maxInstances) { %>maxInstances: <%= options.maxInstances %>,<% } %><%
+  if(options.maxInstancesPerCapability) { %>maxInstancesPerCapability: <%= options.maxInstancesPerCapability %>,<% } %><%
+  if(options.capabilities) { %>capabilities: <%- JSON.stringify(options.capabilities) %>,<% } %><% 
+  if(options.logLevel) { %>logLevel: '<%= options.logLevel %>',<% } %><% 
+  if(options.outputDir) { %>outputDir: '<%= options.outputDir %>',<% } %><% 
+  if(options.bail) { %>bail: <%= options.bail %>,<% } %><% 
+  if(options.baseUrl) { %>baseUrl: '<%= options.baseUrl %>',<% } %><% 
+  if(options.waitforTimeout) { %>waitforTimeout: <%= options.waitforTimeout %>,<% } %><% 
+  if(options.framework) { %>framework: '<%= options.framework %>',<% } %><% 
+  if(options.specFileRetries) { %>specFileRetries: <%= options.specFileRetries %>,<% } %>
+ };
