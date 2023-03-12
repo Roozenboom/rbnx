@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  CI: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Git
+        run: |
+          git config user.name "Richard Roozenboom"
+          git config user.email "richard.roozenboom@outlook.com"
+
+      - name: Install dependencies 🔧
+        run: npm ci
+
+      - name: Publish package on NPM 📦
+        run: npx nx run webdriverio:release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
