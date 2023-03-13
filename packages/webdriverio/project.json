@@ -61,6 +61,13 @@
           "codeCoverage": true
         }
       }
+    },
+    "release": {
+      "executor": "@theunderscorer/nx-semantic-release:semantic-release",
+      "options": {
+        "buildTarget": "webdriverio:build",
+        "outputPath": "dist/packages/webdriverio"
+      }
     }
   },
   "tags": []

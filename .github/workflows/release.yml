@@ -1,0 +1,32 @@
+name: release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Build & Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure git
+        run: |
+          git config user.name "Richard Roozenboom"
+          git config user.email "richard.roozenboom@outlook.com"
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          CI: true
+
+      - name: Release
+        run: npx nx run webdriverio:release
+        env:
+          GIT_AUTHOR_NAME: 'Richard Roozenboom'
+          GIT_AUTHOR_EMAIL: 'richard.roozenboom@outlook.com'
+          GIT_COMMITTER_NAME: 'Richard Roozenboom'
+          GIT_COMMITTER_EMAIL: 'richard.roozenboom@outlook.com'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

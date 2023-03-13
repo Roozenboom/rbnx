@@ -1,6 +1,6 @@
 {
   "name": "@rbnx/webdriverio",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "webdriverio plugin for nx",
   "author": "Richard Roozenboom",
   "license": "MIT",
@@ -11,6 +11,10 @@
   },
   "bugs": {
     "url": "https://github.com/roozenboom/rbnx/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "keywords": [
     "nrwl",
