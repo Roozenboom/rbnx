@@ -52,6 +52,8 @@ const wdioOpts: wdioOptsKeys[] = [
   'path',
   'waitforTimeout',
   'framework',
+  'reporters',
+  'services',
   'specFileRetries',
   'specFileRetriesDelay',
   'specFileRetriesDeferred',
