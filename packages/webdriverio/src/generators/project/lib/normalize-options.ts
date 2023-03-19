@@ -9,6 +9,12 @@ export function normalizeOptions(
   const e2eProjectName = project + '-e2e';
 
   options.autoConfig = options.autoConfig ?? true;
+  if (options.protocol) {
+    options.services = [
+      ...(options.services ?? []),
+      options.protocol === 'devtools' ? 'devtools' : 'selenium-standalone',
+    ];
+  }
 
   const projectDirectory = e2eProjectName;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');

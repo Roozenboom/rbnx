@@ -25,6 +25,8 @@ export interface WdioOptions {
   path?: string;
   waitforTimeout?: number;
   framework?: Framework;
+  reporters?: Reporters[];
+  services?: Services[];
   specFileRetries?: number;
   specFileRetriesDelay?: number;
   specFileRetriesDeferred?: boolean;
@@ -50,6 +52,8 @@ const wdioOpts: wdioOptsKeys[] = [
   'path',
   'waitforTimeout',
   'framework',
+  'reporters',
+  'services',
   'specFileRetries',
   'specFileRetriesDelay',
   'specFileRetriesDeferred',

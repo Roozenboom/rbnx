@@ -71,6 +71,21 @@
       "description": "Framework you want to run your specs with.",
       "enum": ["mocha", "jasmine"]
     },
+    "reporters": {
+      "description": "Adds the specified wdio reporter",
+      "type": "array",
+      "enum": ["allure", "concise", "dot", "junit", "spec", "none"]
+    },
+    "services": {
+      "description": "Adds the specified wdio service",
+      "type": "array",
+      "enum": ["devtools", "selenium-standalone", "none"]
+    },
+    "protocol": {
+      "description": "The automation protocol to use with WebdriverIO",
+      "type": "string",
+      "enum": ["webdriver", "devtools"]
+    },
     "specFileRetries": {
       "type": "number",
       "description": "The number of times to retry the entire specfile when it fails."

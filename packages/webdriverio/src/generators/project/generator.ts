@@ -14,7 +14,10 @@ export default async function projectGenerator(tree: Tree, options: Schema) {
     return Promise.reject(`${project} is not a valid project in the workspace`);
   }
 
-  const initTask = await initGenerator(tree, { skipFormat: true });
+  const initTask = await initGenerator(tree, {
+    ...normalizedOptions,
+    skipFormat: true,
+  });
 
   addProjectConfig(tree, normalizedOptions);
   await addProjectFiles(tree, normalizedOptions);
