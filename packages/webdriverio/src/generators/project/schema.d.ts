@@ -1,9 +1,10 @@
-import type { BrowserName, WdioOptions } from '../../wdio';
+import type { BrowserName, Protocol, WdioOptions } from '../../wdio';
 
 export interface Schema extends WdioOptions {
   project: string;
   tags?: string;
   browsers?: BrowserName[];
+  protocol?: Protocol;
   wdioConfig?: string;
   autoConfig?: boolean;
   skipFormat?: boolean;

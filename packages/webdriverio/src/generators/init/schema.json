@@ -14,8 +14,9 @@
     "framework": {
       "description": "Adds the specified wdio test framework",
       "type": "string",
-      "enum": ["mocha", "jasmine", "none"],
-      "default": "jasmine"
+      "enum": ["mocha", "jasmine"],
+      "default": "jasmine",
+      "x-prompt": "Which test framework do you want to use?"
     },
     "reporters": {
       "description": "Adds the specified wdio reporter",

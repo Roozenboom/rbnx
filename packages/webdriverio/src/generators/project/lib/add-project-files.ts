@@ -11,12 +11,22 @@ import type { NormalizedSchema } from '../schema';
 export function addProjectFiles(tree: Tree, options: NormalizedSchema) {
   const { autoConfig, projectRoot } = options;
 
+  const framework =
+    options.framework ?? readPropertyFromConfig(tree, 'framework').shift();
+  const services = [
+    ...new Set([
+      ...(options.services ?? []),
+      ...readPropertyFromConfig(tree, 'services'),
+    ]),
+  ];
+
   const templateOptions = {
     options,
     offsetFromRoot: offsetFromRoot(projectRoot),
-    protocol: getProtocol(tree),
-    wdioFrameworkType: getFrameWorkTypePackage(tree),
-    wdioServiceTypes: getServiceTypePackage(tree),
+    framework,
+    protocol: options.protocol ?? getProtocol(services),
+    wdioFrameworkType: getFrameWorkTypePackage(framework),
+    wdioServiceTypes: getServiceTypePackage(services),
     generated: '',
     tmpl: '',
   };
@@ -42,9 +52,7 @@ export function addProjectFiles(tree: Tree, options: NormalizedSchema) {
   }
 }
 
-function getFrameWorkTypePackage(tree: Tree) {
-  const framework = readPropertyFromConfig(tree, 'framework').shift();
-
+function getFrameWorkTypePackage(framework: string) {
   const frameworkTypePackages = new Map([
     ['mocha', '@wdio/mocha-framework'],
     ['jasmine', '@wdio/jasmine-framework'],
@@ -54,9 +62,7 @@ function getFrameWorkTypePackage(tree: Tree) {
   return frameworkTypePackages.get(framework) ?? '';
 }
 
-function getServiceTypePackage(tree: Tree) {
-  const services = readPropertyFromConfig(tree, 'services');
-
+function getServiceTypePackage(services: string[]) {
   const serviceTypePackages = new Map([['devtools', '@wdio/devtools-service']]);
 
   return services
@@ -64,8 +70,7 @@ function getServiceTypePackage(tree: Tree) {
     .filter(Boolean);
 }
 
-function getProtocol(tree: Tree) {
-  const services = readPropertyFromConfig(tree, 'services');
+function getProtocol(services: string[]) {
   return services.includes('devtools') ? 'devtools' : 'webdriver';
 }
 

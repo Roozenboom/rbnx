@@ -1,6 +1,6 @@
 describe('webdriver.io page', () => {<% 
-    if (protocol === "devtools") { %>
-    before(async () => {
+    if (protocol === "devtools") { %><% 
+    if (framework === "mocha") { %>before<% } else if (framework === 'jasmine') { %>beforeAll<% } %>(async () => {
         await browser.enablePerformanceAudits();
     });
     <% } %>
