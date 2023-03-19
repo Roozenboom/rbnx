@@ -1,9 +1,14 @@
 import { exec } from 'node:child_process';
+import * as startDevServerModule from './lib/start-dev-server';
 import runExecutor from './executor';
 
 jest.mock('node:child_process');
 const pipe = jest.fn();
 const execMock = jest.mocked(exec);
+
+const startDevServer = jest
+  .spyOn(startDevServerModule, 'startDevServer')
+  .mockResolvedValueOnce('http://localhost:4200');
 
 const context = {
   root: '/root',
@@ -30,7 +35,9 @@ describe('Build Executor', () => {
       return { stdout: { pipe } } as unknown as ReturnType<typeof execMock>;
     });
   });
+
   afterEach(jest.resetAllMocks);
+
   it('can run', async () => {
     const output = await runExecutor({ wdioConfig: 'wdio.config.ts' }, context);
     expect(execMock).toHaveBeenCalledWith(
@@ -48,6 +55,25 @@ describe('Build Executor', () => {
         specs: ['src/e2e/**/*.spec.ts'],
         outputDir: './tmp',
         browsers: ['firefox'],
+      },
+      context
+    );
+    expect(execMock).toHaveBeenCalledWith(
+      'npx wdio wdio.generated.config.ts',
+      expect.objectContaining({ cwd: './apps/test-e2e' }),
+      expect.any(Function)
+    );
+    expect(pipe).toHaveBeenCalledTimes(1);
+    expect(output.success).toBe(true);
+  });
+
+  it('should generate wdio config with headless capabilities', async () => {
+    const output = await runExecutor(
+      {
+        specs: ['src/e2e/**/*.spec.ts'],
+        outputDir: './tmp',
+        browsers: ['chrome', 'firefox'],
+        headless: true,
       },
       context
     );
@@ -92,6 +118,21 @@ describe('Build Executor', () => {
       expect.any(Function)
     );
     expect(pipe).toHaveBeenCalledTimes(1);
+    expect(output.success).toBe(true);
+  });
+
+  it('should start dev server', async () => {
+    const options = {
+      specs: ['src/e2e/**/*.spec.ts'],
+      skipServe: false,
+    };
+    const output = await runExecutor(options, context);
+
+    expect(startDevServer).toHaveBeenCalledTimes(1);
+    expect(startDevServer).toHaveBeenCalledWith(
+      expect.objectContaining(options),
+      context
+    );
     expect(output.success).toBe(true);
   });
 

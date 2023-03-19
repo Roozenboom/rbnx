@@ -4,7 +4,7 @@ import generator from './generator';
 import type { Schema } from './schema';
 
 describe('webdriverio generator', () => {
-  let appTree: Tree;
+  let tree: Tree;
   const options: Schema = {
     runner: 'local',
     framework: 'mocha',
@@ -13,12 +13,12 @@ describe('webdriverio generator', () => {
   };
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace();
+    tree = createTreeWithEmptyWorkspace();
   });
 
   it('should run successfully', async () => {
-    await generator(appTree, options);
-    const packageJson = readJson(appTree, 'package.json');
+    await generator(tree, options);
+    const packageJson = readJson(tree, 'package.json');
     expect(packageJson.devDependencies['@wdio/cli']).toBeDefined();
   });
 });
