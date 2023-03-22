@@ -1,6 +1,7 @@
 /dist
-# /tmp
-/out-tsc
 /coverage
 /node_modules
 /.vscode
+
+# nx format:check fails on CI on this file
+CHANGELOG.md
