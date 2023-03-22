@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/roozenboom/rbnx/compare/v1.1.0...v1.2.0) (2023-03-22)
+
+
+### Features
+
+* simplify wdio configuration inheritence ([a8370c6](https://github.com/roozenboom/rbnx/commit/a8370c60f608b953fb766fed7889023ac793b9af))
+
 # [1.1.0](https://github.com/roozenboom/rbnx/compare/v1.0.0...v1.1.0) (2023-03-19)
 
 
