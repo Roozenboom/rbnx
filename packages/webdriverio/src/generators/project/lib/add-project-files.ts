@@ -9,7 +9,7 @@ import { capabilitiesFilter } from '../../../wdio';
 import type { NormalizedSchema } from '../schema';
 
 export function addProjectFiles(tree: Tree, options: NormalizedSchema) {
-  const { autoConfig, projectRoot } = options;
+  const { projectRoot } = options;
 
   const framework =
     options.framework ?? readPropertyFromConfig(tree, 'framework').shift();
@@ -22,14 +22,17 @@ export function addProjectFiles(tree: Tree, options: NormalizedSchema) {
 
   const templateOptions = {
     options,
-    offsetFromRoot: offsetFromRoot(projectRoot),
     framework,
     protocol: options.protocol ?? getProtocol(services),
     wdioFrameworkType: getFrameWorkTypePackage(framework),
     wdioServiceTypes: getServiceTypePackage(services),
-    generated: '',
+    offsetFromRoot: offsetFromRoot(projectRoot),
     tmpl: '',
   };
+
+  if (options.browsers) {
+    options.capabilities = capabilitiesFilter(options);
+  }
 
   generateFiles(
     tree,
@@ -37,19 +40,6 @@ export function addProjectFiles(tree: Tree, options: NormalizedSchema) {
     projectRoot,
     templateOptions
   );
-
-  if (!autoConfig) {
-    if (options.browsers) {
-      options.capabilities = capabilitiesFilter(options);
-    }
-
-    generateFiles(
-      tree,
-      joinPathFragments(__dirname, '..', '..', '..', 'wdio', 'files'),
-      projectRoot,
-      templateOptions
-    );
-  }
 }
 
 function getFrameWorkTypePackage(framework: string) {

@@ -5,24 +5,22 @@ export async function startDevServer(
   options: NormalizedSchema,
   context: ExecutorContext
 ) {
-  if (!options.devServerTarget || options.skipServe) {
-    return options.baseUrl;
+  const { baseUrl, devServerTarget, skipServe } = options;
+  if (!devServerTarget || skipServe) {
+    return baseUrl;
   }
 
-  const devServerTarget = parseTargetString(
-    options.devServerTarget,
-    context.projectGraph
-  );
+  const target = parseTargetString(devServerTarget, context.projectGraph);
 
   for await (const output of await runExecutor<{
     success: boolean;
     baseUrl?: string;
-  }>(devServerTarget, {}, context)) {
+  }>(target, {}, context)) {
     if (!output.success) {
       throw new Error(
-        `Could not start dev server for ${devServerTarget.project} project`
+        `Could not start dev server for ${target.project} project`
       );
     }
-    return options.baseUrl || (output.baseUrl as string);
+    return baseUrl || (output.baseUrl as string);
   }
 }

@@ -42,7 +42,6 @@ describe('project generator', () => {
   it('should create wdio config with capabilities', async () => {
     const options: Schema = {
       project: 'test',
-      autoConfig: false,
       protocol: 'devtools',
       browsers: ['firefox'],
       capabilities: [{ browserName: 'chrome' }],

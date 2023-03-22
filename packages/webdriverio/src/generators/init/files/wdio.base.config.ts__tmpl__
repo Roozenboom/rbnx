@@ -2,14 +2,14 @@ import type { Options } from '@wdio/types'
 
 export const wdioConfig: Options.Testrunner = {
   //
-  // ====================
-  // Runner Configuration
-  // ====================
+  // ======================
+  //  Runner Configuration
+  // ======================
   runner: "<%= runner %>",
   //
-  // ============
-  // Capabilities
-  // ============
+  // ==============
+  //  Capabilities
+  // ==============
   // Define your capabilities here. WebdriverIO can run multiple capabilities at the same
   // time. Depending on the number of capabilities, WebdriverIO launches several test
   // sessions.  
@@ -23,9 +23,9 @@ export const wdioConfig: Options.Testrunner = {
   // This is mostly used within CI/CD environments where no display is used.
   headless: false,
   //
-  // ===================
-  // Test Configurations
-  // ===================
+  // =====================
+  //  Test Configurations
+  // =====================
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
@@ -54,9 +54,9 @@ export const wdioConfig: Options.Testrunner = {
   // Default request retries count
   connectionRetryCount: 3,
   //
-  // =======================
-  // Framework Configuration
-  // =======================
+  // =========================
+  //  Framework Configuration
+  // =========================
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
   // see also: https://webdriver.io/docs/frameworks
@@ -78,26 +78,26 @@ export const wdioConfig: Options.Testrunner = {
   jasmineOpts: {
     // Jasmine default timeout
     defaultTimeoutInterval: 60000,
-  },<% } %>
+  },<% } %><% 
+  if (services.length) { %>
   //
-  // ======================
-  // Services Configuration
-  // ======================
+  // ========================
+  //  Services Configuration
+  // ========================
   // Test runner services
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
-  // commands. Instead, they hook themselves up into the test process.<% 
-  if (services.length) { %>
+  // commands. Instead, they hook themselves up into the test process.
   services:  [<%  for (let service of services){ %>'<%= service %>',<% } %>],
-  <% } %>
+  <% } %><% 
+  if (reporters.length) { %>
   //
-  // ======================
-  // Reporter Configuration
-  // ======================
+  // ========================
+  //  Reporter Configuration
+  // ========================
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
-  // see also: https://webdriver.io/docs/dot-reporter<% 
-  if (reporters.length) { %>
+  // see also: https://webdriver.io/docs/dot-reporter
   reporters: [<%  for (let reporter of reporters){ %>'<%= reporter %>',<% } %>],
   <% } %>
 };

@@ -3,14 +3,12 @@ import {
   generateFiles,
   getPackageManagerCommand,
   joinPathFragments,
-  offsetFromRoot,
   Tree,
   workspaceRoot,
 } from '@nrwl/devkit';
 import { flushChanges, FsTree } from 'nx/src/generators/tree';
 import { exec } from 'node:child_process';
 import { unlink } from 'node:fs/promises';
-import { capabilitiesFilter } from '../../../wdio';
 import type { NormalizedSchema } from '../schema';
 
 export async function runWdio(options: NormalizedSchema) {
@@ -28,23 +26,15 @@ export async function runWdio(options: NormalizedSchema) {
 }
 
 export async function generateWdioConfig(options: NormalizedSchema) {
-  const { wdioConfig, browsers, projectRoot } = options;
-
-  if (wdioConfig) return;
-
-  if (browsers) {
-    options.capabilities = capabilitiesFilter(options);
-  }
+  const { projectRoot } = options;
 
   const tree: Tree = new FsTree(workspaceRoot, false);
   generateFiles(
     tree,
-    joinPathFragments(__dirname, '..', '..', '..', 'wdio', 'files'),
+    joinPathFragments(__dirname, '..', 'files'),
     projectRoot,
     {
       tmpl: '',
-      generated: '.generated',
-      offsetFromRoot: offsetFromRoot(projectRoot),
       options,
     }
   );
@@ -53,9 +43,7 @@ export async function generateWdioConfig(options: NormalizedSchema) {
 }
 
 export async function unlinkWdioConfig(options: NormalizedSchema) {
-  const { configPath, isVerbose, wdioConfig } = options;
-
-  if (wdioConfig) return;
+  const { configPath, isVerbose } = options;
   try {
     await unlink(configPath);
   } catch (error) {

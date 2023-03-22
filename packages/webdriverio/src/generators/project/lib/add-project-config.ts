@@ -3,7 +3,7 @@ import { filterWdioOptions } from '../../../wdio';
 import type { NormalizedSchema } from '../schema';
 
 export function addProjectConfig(tree: Tree, options: NormalizedSchema) {
-  const { autoConfig, parsedTags, projectRoot, project } = options;
+  const { parsedTags, projectRoot, project } = options;
   const e2eProjectName = project + '-e2e';
 
   addProjectConfiguration(tree, e2eProjectName, {
@@ -13,9 +13,10 @@ export function addProjectConfig(tree: Tree, options: NormalizedSchema) {
     targets: {
       e2e: {
         executor: '@rbnx/webdriverio:e2e',
-        options: !autoConfig
-          ? { wdioConfig: 'wdio.config.ts' }
-          : filterWdioOptions(options),
+        options: {
+          wdioConfig: 'wdio.config.ts',
+          ...filterWdioOptions(options),
+        },
       },
     },
     tags: parsedTags,

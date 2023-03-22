@@ -69,22 +69,45 @@ npx nx e2e your-app-name-e2e --configuration=ci
 
 ## Configuration
 
-The @rbnx/webdriverio nx plugin supports two configuration methods, the default configuration option uses the options object in the `project.json` file and will generate the wdio config file when you run the tests.
-An alternative method is to only specify the path to the configuration file in the project.json with the `wdioConfig` property. In this case it will not generate a config file but will use the one specified.
+The @rbnx/webdriverio nx plugin uses an inheritence configuration model, with a base configuration (`wdio.base.config.ts`) in the root of the NX workspace and configuration on project level (`wdio.config.ts`) that extends the base configuration. The project WebdriverIO configuration path is set in the NX project (`project.json`) e2e target options `wdioConfig` property, the target options can also be used to overwrite the base and project configuration.
 
-**NOTE:** For creating a WebdriverIO e2e project with configuration file you can set the flag `auto-config` to `false`
-
-```sh
-npx nx generate @rbnx/webdriverio:project your-app-name --no-auto-config
+```json
+"targets": {
+  "e2e": {
+    "executor": "@rbnx/webdriverio:e2e",
+    "options": {
+      "wdioConfig": "wdio.config.ts"
+    }
+  }
+},
 ```
-
-Regardless of whether you choose configuration via project.json or wdio config, you can use all standard WebdriverIO configuration options.
 
 For all the WebdriverIO configuration options please check the [official documentation](https://webdriver.io/docs/configurationfile) or the [example wdio config file](https://github.com/webdriverio/webdriverio/blob/main/examples/wdio.conf.js) with all possible options.
 
+### DevServer
+
+To automatically start the devServer before the e2e tests are executed you need to provide the configuration option `devServerTarget`.
+
+If `devServerTarget` is provided, the url returned from the started dev server will be passed to WebdriverIO as the baseUrl option.
+
+```json
+  "targets": {
+    "e2e": {
+      "executor": "@rbnx/webdriverio:e2e",
+      "options": {
+        ...
+        "devServerTarget": "your-app-name:serve:development",
+        ...
+      }
+    }
+  },
+```
+
+To skip the execution of the devServer you can overwrite this by providing the `--skipServe` flag.
+
 ### Capabilities
 
-The @rbnx/webdriverio plugin has some predefined capabilities that can be configured with the `browsers` option. The predefined capabilies are:
+The @rbnx/webdriverio plugin has some predefined capabilities that can be configured with the `browsers` option in the project configuration. The predefined capabilies are:
 
 - Chrome
 - Firefox
