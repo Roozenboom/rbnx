@@ -41,7 +41,7 @@ describe('Build Executor', () => {
   it('can run', async () => {
     const output = await runExecutor({ wdioConfig: 'wdio.config.ts' }, context);
     expect(execMock).toHaveBeenCalledWith(
-      'npx wdio wdio.config.ts',
+      'npx wdio wdio.generated.config.ts',
       expect.objectContaining({ cwd: './apps/test-e2e' }),
       expect.any(Function)
     );
@@ -95,7 +95,7 @@ describe('Build Executor', () => {
       context
     );
     expect(execMock).toHaveBeenCalledWith(
-      'npx wdio wdio.config.ts --spec=src/e2e/test.spec.ts',
+      'npx wdio wdio.generated.config.ts --spec=src/e2e/test.spec.ts',
       expect.objectContaining({ cwd: './apps/test-e2e' }),
       expect.any(Function)
     );
@@ -114,6 +114,23 @@ describe('Build Executor', () => {
     );
     expect(execMock).toHaveBeenCalledWith(
       'npx wdio wdio.generated.config.ts --suite=test',
+      expect.objectContaining({ cwd: './apps/test-e2e' }),
+      expect.any(Function)
+    );
+    expect(pipe).toHaveBeenCalledTimes(1);
+    expect(output.success).toBe(true);
+  });
+
+  it('should run with specified protocol', async () => {
+    const output = await runExecutor(
+      {
+        specs: ['src/e2e/**/*.spec.ts'],
+        protocol: 'devtools',
+      },
+      context
+    );
+    expect(execMock).toHaveBeenCalledWith(
+      'npx wdio wdio.generated.config.ts',
       expect.objectContaining({ cwd: './apps/test-e2e' }),
       expect.any(Function)
     );

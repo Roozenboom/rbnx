@@ -25,6 +25,7 @@ export interface WdioOptions {
   path?: string;
   waitforTimeout?: number;
   framework?: Framework;
+  protocol?: Protocol;
   reporters?: Reporters[];
   services?: Services[];
   specFileRetries?: number;
@@ -34,30 +35,7 @@ export interface WdioOptions {
 
 type wdioOptsKeys = keyof WdioOptions;
 
-const wdioOpts: wdioOptsKeys[] = [
-  'specs',
-  'exclude',
-  'suites',
-  'maxInstances',
-  'maxInstancesPerCapability',
-  'browsers',
-  'capabilities',
-  'headless',
-  'logLevel',
-  'outputDir',
-  'bail',
-  'baseUrl',
-  'hostname',
-  'port',
-  'path',
-  'waitforTimeout',
-  'framework',
-  'reporters',
-  'services',
-  'specFileRetries',
-  'specFileRetriesDelay',
-  'specFileRetriesDeferred',
-];
+const wdioOpts: wdioOptsKeys[] = ['browsers', 'headless', 'protocol'];
 
 export function filterWdioOptions(obj): WdioOptions {
   return Object.fromEntries(

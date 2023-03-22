@@ -6,7 +6,6 @@ export interface Schema extends WdioOptions {
   browsers?: BrowserName[];
   protocol?: Protocol;
   wdioConfig?: string;
-  autoConfig?: boolean;
   skipFormat?: boolean;
 }
 

@@ -1,4 +1,9 @@
-import { getWorkspaceLayout, names, Tree } from '@nrwl/devkit';
+import {
+  getWorkspaceLayout,
+  joinPathFragments,
+  names,
+  Tree,
+} from '@nrwl/devkit';
 import type { NormalizedSchema, Schema } from '../schema';
 
 export function normalizeOptions(
@@ -8,7 +13,6 @@ export function normalizeOptions(
   const project = names(options.project).fileName;
   const e2eProjectName = project + '-e2e';
 
-  options.autoConfig = options.autoConfig ?? true;
   if (options.protocol) {
     options.services = [
       ...(options.services ?? []),
@@ -18,7 +22,11 @@ export function normalizeOptions(
 
   const projectDirectory = e2eProjectName;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${projectDirectory}`;
+  const projectRoot = joinPathFragments(
+    getWorkspaceLayout(tree).appsDir,
+    projectDirectory
+  );
+
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
