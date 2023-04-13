@@ -6,7 +6,7 @@ import {
   Tree,
   workspaceRoot,
 } from '@nrwl/devkit';
-import { flushChanges, FsTree } from 'nx/src/generators/tree';
+import { flushChanges } from 'nx/src/generators/tree';
 import { exec } from 'node:child_process';
 import { unlink } from 'node:fs/promises';
 import type { NormalizedSchema } from '../schema';
@@ -25,10 +25,12 @@ export async function runWdio(options: NormalizedSchema) {
   });
 }
 
-export async function generateWdioConfig(options: NormalizedSchema) {
+export async function generateWdioConfig(
+  tree: Tree,
+  options: NormalizedSchema
+) {
   const { projectRoot } = options;
 
-  const tree: Tree = new FsTree(workspaceRoot, false);
   generateFiles(
     tree,
     joinPathFragments(__dirname, '..', 'files'),

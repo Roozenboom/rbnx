@@ -1,4 +1,5 @@
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext, Tree, workspaceRoot } from '@nrwl/devkit';
+import { FsTree } from 'nx/src/generators/tree';
 import { normalizeOptions } from './lib/normalize-options';
 import { generateWdioConfig, runWdio, unlinkWdioConfig } from './lib/run-wdio';
 import { startDevServer } from './lib/start-dev-server';
@@ -8,11 +9,13 @@ export default async function runExecutor(
   options: Schema,
   context: ExecutorContext
 ) {
-  const wdioOptions = normalizeOptions(options, context);
+  const tree: Tree = new FsTree(workspaceRoot, false);
+
+  const wdioOptions = normalizeOptions(tree, options, context);
   try {
     wdioOptions.baseUrl = await startDevServer(wdioOptions, context);
 
-    await generateWdioConfig(wdioOptions);
+    await generateWdioConfig(tree, wdioOptions);
     await runWdio(wdioOptions);
     await unlinkWdioConfig(wdioOptions);
 

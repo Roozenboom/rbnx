@@ -7,6 +7,7 @@ export interface Schema extends WdioOptions {
   wdioConfig?: string;
   devServerTarget?: string;
   skipServe?: boolean;
+  debug?: boolean;
 }
 
 export interface NormalizedSchema extends Schema {
@@ -17,4 +18,5 @@ export interface NormalizedSchema extends Schema {
   isVerbose: boolean;
   projectName: string;
   projectRoot: string;
+  timeout: number;
 }
