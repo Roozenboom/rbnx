@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/roozenboom/rbnx/compare/v1.2.0...v1.3.0) (2023-04-14)
+
+
+### Features
+
+* add option to automatically configure wdio for debugging ([691f95c](https://github.com/roozenboom/rbnx/commit/691f95cfcccd2e945f63748aa221e2e6026b7679))
+* add option to enable wdio watch mode ([03789b7](https://github.com/roozenboom/rbnx/commit/03789b7887bb4b7e1dcfb15bf34f35ec955224f6))
+
 # [1.2.0](https://github.com/roozenboom/rbnx/compare/v1.1.0...v1.2.0) (2023-03-22)
 
 
