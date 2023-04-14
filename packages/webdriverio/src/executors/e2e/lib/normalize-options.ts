@@ -2,12 +2,18 @@ import {
   ExecutorContext,
   joinPathFragments,
   offsetFromRoot,
+  Tree,
 } from '@nrwl/devkit';
 import Path from 'node:path';
-import { capabilitiesFilter } from '../../../wdio';
+import {
+  capabilitiesFilter,
+  Framework,
+  readPropertyFromConfig,
+} from '../../../wdio';
 import type { NormalizedSchema, Schema } from '../schema';
 
 export function normalizeOptions(
+  tree: Tree,
   options: Schema,
   context: ExecutorContext
 ): NormalizedSchema {
@@ -38,6 +44,16 @@ export function normalizeOptions(
     ];
   }
 
+  let timeout = 60000;
+  if (options.debug) {
+    const MAX_SAFE_TIMEOUT = Math.pow(2, 31) - 1;
+    timeout = MAX_SAFE_TIMEOUT;
+
+    options.logLevel = 'debug';
+    options.maxInstances = 1;
+    options.framework = getFrameWorkFromConfig(tree, options, projectRoot);
+  }
+
   return {
     ...options,
     configFile,
@@ -47,5 +63,35 @@ export function normalizeOptions(
     isVerbose,
     projectName,
     projectRoot,
+    timeout,
   };
+}
+
+function getFrameWorkFromConfig(
+  tree: Tree,
+  options: Schema,
+  projectRoot: string
+): Framework {
+  if (options.framework) return options.framework;
+
+  if (options.wdioConfig) {
+    const configPath = joinPathFragments(projectRoot, options.wdioConfig);
+
+    if (tree.exists(configPath)) {
+      const framework = readPropertyFromConfig<Framework>(
+        tree,
+        configPath,
+        'framework'
+      ).shift();
+      if (framework) {
+        return framework;
+      }
+    }
+  }
+
+  return readPropertyFromConfig<Framework>(
+    tree,
+    'wdio.base.config.ts',
+    'framework'
+  ).shift();
 }

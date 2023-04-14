@@ -95,9 +95,7 @@ If `devServerTarget` is provided, the url returned from the started dev server w
     "e2e": {
       "executor": "@rbnx/webdriverio:e2e",
       "options": {
-        ...
         "devServerTarget": "your-app-name:serve:development",
-        ...
       }
     }
   },
@@ -145,6 +143,28 @@ A WebdriverIO service that allows you to use the native browser interface [DevTo
 
 **Selenium Standalone Service**
 Handling the Selenium server is out of the scope of the actual WebdriverIO project. This service helps you to run Selenium seamlessly when running tests with the WDIO testrunner. It uses the well-known selenium-standalone NPM package that automatically sets up the standalone server and all required drivers for you.
+
+## Debugging
+
+You can enable debug mode when you run your e2e project by providing the `--debug` flag.
+
+```sh
+npx nx e2e your-app-name-e2e --spec=src/e2e/app.spec.ts --debug
+```
+
+This flag will change some of the WebdriverIO settings:
+
+- logLevel: debug
+- maxInstances: 1
+- timeout: 2147483647
+
+To activate the debug mode in your spec file you have to add
+
+```ts
+await browser.debug();
+```
+
+Read the documentation for more information about [debugging](https://webdriver.io/docs/debugging) with WebdriverIO
 
 ## That's all!
 

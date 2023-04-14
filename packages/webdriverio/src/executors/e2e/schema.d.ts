@@ -8,6 +8,7 @@ export interface Schema extends WdioOptions {
   devServerTarget?: string;
   skipServe?: boolean;
   watch?: boolean;
+  debug?: boolean;
 }
 
 export interface NormalizedSchema extends Schema {
@@ -18,4 +19,5 @@ export interface NormalizedSchema extends Schema {
   isVerbose: boolean;
   projectName: string;
   projectRoot: string;
+  timeout: number;
 }
