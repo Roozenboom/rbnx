@@ -91,6 +91,15 @@
       "type": "boolean",
       "description": "Skip dev server target execution.",
       "default": false
+    },
+    "watch": {
+      "type": "boolean",
+      "description": "Watch for file changes and automatically rerun tests",
+      "default": false
+    },
+    "filesToWatch": {
+      "type": "array",
+      "description": "Add files to watch (e.g. application code or page objects) when running `wdio` command with `--watch` flag. Globbing is supported."
     }
   },
   "required": []

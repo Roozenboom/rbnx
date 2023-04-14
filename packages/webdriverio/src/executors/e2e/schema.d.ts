@@ -7,6 +7,7 @@ export interface Schema extends WdioOptions {
   wdioConfig?: string;
   devServerTarget?: string;
   skipServe?: boolean;
+  watch?: boolean;
   debug?: boolean;
 }
 

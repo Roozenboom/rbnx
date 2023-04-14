@@ -31,6 +31,7 @@ export interface WdioOptions {
   specFileRetries?: number;
   specFileRetriesDelay?: number;
   specFileRetriesDeferred?: boolean;
+  filesToWatch?: string;
 }
 
 type wdioOptsKeys = keyof WdioOptions;
