@@ -1,4 +1,4 @@
-import { formatFiles, getProjects, Tree } from '@nrwl/devkit';
+import { formatFiles, getProjects, Tree } from '@nx/devkit';
 import initGenerator from '../init/generator';
 import { addProjectConfig } from './lib/add-project-config';
 import { addProjectFiles } from './lib/add-project-files';

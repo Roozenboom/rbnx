@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "NxWdioInit",
   "title": "Add WebdriverIO configuration to the workspace",
   "type": "object",

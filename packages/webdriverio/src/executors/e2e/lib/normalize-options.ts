@@ -3,7 +3,7 @@ import {
   joinPathFragments,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import Path from 'node:path';
 import {
   capabilitiesFilter,

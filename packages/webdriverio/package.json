@@ -30,6 +30,7 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "peerDependencies": {
-    "@wdio/cli": "^8.3.0"
+    "@nx/devkit": "^16.0.0",
+    "@wdio/cli": "^8.8.0"
   }
 }

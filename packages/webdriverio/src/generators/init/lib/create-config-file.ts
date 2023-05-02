@@ -1,4 +1,4 @@
-import { Tree, joinPathFragments, generateFiles } from '@nrwl/devkit';
+import { Tree, joinPathFragments, generateFiles } from '@nx/devkit';
 import { Schema } from '../schema';
 
 export function createWdioBaseConfigFile(tree: Tree, options: Schema) {

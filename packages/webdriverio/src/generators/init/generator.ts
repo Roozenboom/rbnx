@@ -1,4 +1,4 @@
-import { formatFiles, Tree } from '@nrwl/devkit';
+import { formatFiles, Tree } from '@nx/devkit';
 import type { Schema } from './schema';
 import { addDependencies } from './lib/add-dependencies';
 import { createWdioBaseConfigFile } from './lib/create-config-file';

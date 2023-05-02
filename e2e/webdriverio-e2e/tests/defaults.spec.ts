@@ -1,4 +1,4 @@
-import { joinPathFragments } from '@nrwl/devkit';
+import { joinPathFragments } from '@nx/devkit';
 import {
   checkFilesExist,
   cleanup,
@@ -7,13 +7,21 @@ import {
   runNxCommandAsync,
   runCommandAsync,
   uniq,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
 
 describe('webdriverio e2e - defaults', () => {
-  beforeAll(() => {
+  const project = uniq('app');
+  const e2eProject = project + '-e2e';
+
+  beforeAll(async () => {
     cleanup();
     ensureNxProject('@rbnx/webdriverio', 'dist/packages/webdriverio');
-  });
+
+    await runCommandAsync(`npm install --dev @nx/react@latest`);
+    await runNxCommandAsync(
+      `generate @nx/react:app ${project} --e2eTestRunner=none --linter=eslint --bundler vite`
+    );
+  }, 100000);
 
   afterAll(() => {
     runNxCommandAsync('reset');
@@ -36,16 +44,9 @@ describe('webdriverio e2e - defaults', () => {
     ).toBeTruthy();
 
     expect(() => checkFilesExist('wdio.base.config.ts')).not.toThrow();
-  }, 120000);
+  }, 60000);
 
   it('should create an e2e project and run the e2e executor', async () => {
-    const project = uniq('app');
-    const e2eProject = project + '-e2e';
-
-    await runCommandAsync(`npm install --dev @nrwl/react@latest`);
-    await runNxCommandAsync(
-      `generate @nrwl/react:app ${project} --e2eTestRunner=none --linter=eslint --bundler vite`
-    );
     await runNxCommandAsync(`generate @rbnx/webdriverio:project ${project}`);
 
     const projectJsonPath = joinPathFragments(
@@ -61,9 +62,27 @@ describe('webdriverio e2e - defaults', () => {
       projectJson.targets.e2e.executor === '@rbnx/webdriverio:e2e'
     ).toBeTruthy();
 
+    expect(
+      projectJson.targets.e2e.options.wdioConfig === 'wdio.config.ts'
+    ).toBeTruthy();
+
+    const tsConfigJsonPath = joinPathFragments(
+      'apps',
+      e2eProject,
+      'tsconfig.json'
+    );
+    expect(() => checkFilesExist(tsConfigJsonPath)).not.toThrow();
+    const tsConfigJson = readJson(tsConfigJsonPath);
+    expect(
+      tsConfigJson.compilerOptions.types.includes('@wdio/globals/types')
+    ).toBeTruthy();
+    expect(
+      tsConfigJson.compilerOptions.types.includes('@wdio/jasmine-framework')
+    ).toBeTruthy();
+
     const result = await runNxCommandAsync(`e2e ${e2eProject} --headless`);
     expect(result.stdout).toContain(
       `Successfully ran target e2e for project ${e2eProject}`
     );
-  }, 180000);
+  }, 60000);
 });
