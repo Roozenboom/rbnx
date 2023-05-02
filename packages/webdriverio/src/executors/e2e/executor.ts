@@ -1,4 +1,4 @@
-import { ExecutorContext, Tree, workspaceRoot } from '@nrwl/devkit';
+import { ExecutorContext, Tree, workspaceRoot } from '@nx/devkit';
 import { FsTree } from 'nx/src/generators/tree';
 import { normalizeOptions } from './lib/normalize-options';
 import { generateWdioConfig, runWdio, unlinkWdioConfig } from './lib/run-wdio';

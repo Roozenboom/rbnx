@@ -3,7 +3,7 @@ export type Package = {
   version: string;
 };
 
-const wdioVersion = '^8.3.0';
+const wdioVersion = '^8.8.0';
 const jasmineTypesVersion = '^4.3.1';
 const tsNodeVersion = '10.9.1';
 

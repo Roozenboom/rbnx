@@ -1,7 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
   "version": 2,
-  "cli": "nx",
   "title": "Webdriverio e2e test executor",
   "description": "Runs e2e test with Webdriverio",
   "type": "object",

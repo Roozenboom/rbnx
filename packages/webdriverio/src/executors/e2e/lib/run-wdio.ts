@@ -5,7 +5,7 @@ import {
   joinPathFragments,
   Tree,
   workspaceRoot,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { flushChanges } from 'nx/src/generators/tree';
 import { exec } from 'node:child_process';
 import { unlink } from 'node:fs/promises';

@@ -1,4 +1,4 @@
-import { parseTargetString, runExecutor } from '@nrwl/devkit';
+import { parseTargetString, runExecutor } from '@nx/devkit';
 import { NormalizedSchema } from '../schema';
 import { startDevServer } from './start-dev-server';
 
@@ -6,8 +6,8 @@ async function* promiseToIterator(value) {
   yield await Promise.resolve(value);
 }
 
-jest.mock('@nrwl/devkit', () => ({
-  ...jest.requireActual('@nrwl/devkit'),
+jest.mock('@nx/devkit', () => ({
+  ...jest.requireActual('@nx/devkit'),
   runExecutor: jest.fn(),
   parseTargetString: jest.fn(),
 }));

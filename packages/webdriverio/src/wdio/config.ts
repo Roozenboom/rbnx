@@ -1,4 +1,4 @@
-import { Tree } from '@nrwl/devkit';
+import { Tree } from '@nx/devkit';
 import { createSourceFile, Node, ScriptTarget, SyntaxKind } from 'typescript';
 
 export function readPropertyFromConfig<T = string>(

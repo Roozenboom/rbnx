@@ -1,4 +1,4 @@
-import { Tree, addDependenciesToPackageJson } from '@nrwl/devkit';
+import { Tree, addDependenciesToPackageJson } from '@nx/devkit';
 import { Package, packages } from '../../../wdio/versions';
 import type { Schema } from '../schema';
 

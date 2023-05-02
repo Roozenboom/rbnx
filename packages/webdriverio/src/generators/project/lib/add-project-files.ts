@@ -3,7 +3,7 @@ import {
   joinPathFragments,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { capabilitiesFilter, readPropertyFromConfig } from '../../../wdio';
 import type { NormalizedSchema } from '../schema';
 
