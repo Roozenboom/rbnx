@@ -43,6 +43,7 @@ describe('normalize options', () => {
     const output = normalizeOptions(tree, options, context);
 
     expect(output.projectRoot).toEqual('./apps/test-e2e');
+    expect(output.baseConfigPath).toEqual('./wdio.config');
     expect(output.timeout).toEqual(60000);
   });
 
@@ -51,5 +52,49 @@ describe('normalize options', () => {
 
     expect(output.logLevel).toEqual('debug');
     expect(output.timeout).toBeGreaterThan(60000);
+  });
+
+  it('should normalize relative wdioConfig paths', async () => {
+    const output1 = normalizeOptions(
+      tree,
+      { ...options, wdioConfig: 'config/wdio.config.ts' },
+      context
+    );
+    const output2 = normalizeOptions(
+      tree,
+      { ...options, wdioConfig: './config/wdio.config.ts' },
+      context
+    );
+    const output3 = normalizeOptions(
+      tree,
+      { ...options, wdioConfig: '../../config/wdio.config.ts' },
+      context
+    );
+    const output4 = normalizeOptions(
+      tree,
+      { ...options, wdioConfig: '.wdio.config.ts' },
+      context
+    );
+    const output5 = normalizeOptions(
+      tree,
+      { ...options, wdioConfig: '.config/wdio.config.ts' },
+      context
+    );
+
+    expect(output1.baseConfigPath).toEqual('./config/wdio.config');
+    expect(output2.baseConfigPath).toEqual('./config/wdio.config');
+    expect(output3.baseConfigPath).toEqual('../../config/wdio.config');
+    expect(output4.baseConfigPath).toEqual('./.wdio.config');
+    expect(output5.baseConfigPath).toEqual('./.config/wdio.config');
+  });
+
+  it('should normalize absolute wdioConfig paths', async () => {
+    const output = normalizeOptions(
+      tree,
+      { ...options, wdioConfig: '/config/wdio.config.ts' },
+      context
+    );
+
+    expect(output.baseConfigPath).toEqual('/config/wdio.config');
   });
 });
