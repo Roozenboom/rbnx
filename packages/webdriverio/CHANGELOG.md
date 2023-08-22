@@ -1,3 +1,12 @@
+# [1.5.0](https://github.com/roozenboom/rbnx/compare/v1.4.0...v1.5.0) (2023-08-22)
+
+
+### Features
+
+* update to nx 16.7.3 ([ebde261](https://github.com/roozenboom/rbnx/commit/ebde2614f5b1fa3215d00f1f5419d8bbc1bde6d0))
+* update to wdio ^8.15.0 and remove deprecated selenium-standalone service ([792a239](https://github.com/roozenboom/rbnx/commit/792a2394d380f5ffefca2f63f34b77b7de03deb9))
+* **wdio:** allow options.wdioConfig to support absolute and relative paths ([569ebeb](https://github.com/roozenboom/rbnx/commit/569ebeb6acd1e4d109d7147e3ab89d6749e17d0a))
+
 # [1.4.0](https://github.com/roozenboom/rbnx/compare/v1.3.0...v1.4.0) (2023-05-05)
 
 
