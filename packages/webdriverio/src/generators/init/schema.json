@@ -26,7 +26,7 @@
     "services": {
       "description": "Adds the specified wdio service",
       "type": "array",
-      "enum": ["devtools", "selenium-standalone", "none"]
+      "enum": ["devtools", "none"]
     },
     "protocol": {
       "description": "The automation protocol to use with WebdriverIO",

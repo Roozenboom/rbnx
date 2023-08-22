@@ -120,6 +120,7 @@ But you can also provide your own [capabilities](https://webdriver.io/docs/capab
 ```json
 {
   "browserName": "chrome",
+  "browserVersion": "stable"
   "goog:chromeOptions": {
     "args": ["--allow-insecure-localhost"]
   }
@@ -140,9 +141,6 @@ When you initialize the NX plugin you can install and configure the reporters yo
 
 **Devtools Service**
 A WebdriverIO service that allows you to use the native browser interface [DevTools](https://webdriver.io/docs/automationProtocols#devtools-protocol) as automation protocol with Puppeteer. The DevTools protocol gives you access to more automation capabilities (e.g. network interception, tracing etc.) and removes the need to manage browser drivers and versions. DevTools only supports Chromium browsers and (partially) Firefox Nightly.
-
-**Selenium Standalone Service**
-Handling the Selenium server is out of the scope of the actual WebdriverIO project. This service helps you to run Selenium seamlessly when running tests with the WDIO testrunner. It uses the well-known selenium-standalone NPM package that automatically sets up the standalone server and all required drivers for you.
 
 ## Debugging
 
