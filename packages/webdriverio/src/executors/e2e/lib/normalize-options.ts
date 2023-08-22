@@ -27,9 +27,24 @@ export function normalizeOptions(
   const baseConfigModuleName = options.wdioConfig
     ? 'config as wdioConfig'
     : 'wdioConfig';
-  const baseConfigPath = options.wdioConfig
-    ? `./${Path.parse(options.wdioConfig).name}`
-    : joinPathFragments(offsetFromRoot(projectRoot), 'wdio.base.config');
+
+  let baseConfigPath: string;
+  if (options.wdioConfig) {
+    const parsedPath = Path.parse(options.wdioConfig);
+    baseConfigPath = joinPathFragments(parsedPath.dir, parsedPath.name);
+    if (!Path.isAbsolute(options.wdioConfig)) {
+      if (
+        !(baseConfigPath.startsWith('./') || baseConfigPath.startsWith('../'))
+      ) {
+        baseConfigPath = `./${baseConfigPath}`;
+      }
+    }
+  } else {
+    baseConfigPath = joinPathFragments(
+      offsetFromRoot(projectRoot),
+      'wdio.base.config'
+    );
+  }
 
   const isVerbose = context.isVerbose;
 
