@@ -39,9 +39,6 @@ describe('webdriverio e2e - defaults', () => {
     expect(packageJson.devDependencies['@wdio/jasmine-framework']).toBeTruthy();
     expect(packageJson.devDependencies['@types/jasmine']).toBeTruthy();
     expect(packageJson.devDependencies['@wdio/spec-reporter']).toBeTruthy();
-    expect(
-      packageJson.devDependencies['@wdio/selenium-standalone-service']
-    ).toBeTruthy();
 
     expect(() => checkFilesExist('wdio.base.config.ts')).not.toThrow();
   }, 60000);

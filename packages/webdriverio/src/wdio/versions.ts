@@ -3,8 +3,8 @@ export type Package = {
   version: string;
 };
 
-const wdioVersion = '^8.8.0';
-const jasmineTypesVersion = '^4.3.1';
+const wdioVersion = '^8.15.0';
+const jasmineTypesVersion = '^4.3.5';
 const tsNodeVersion = '10.9.1';
 
 export const packages = new Map<string, Package>([
@@ -26,8 +26,4 @@ export const packages = new Map<string, Package>([
   ['spec', { name: '@wdio/spec-reporter', version: wdioVersion }],
   // Services
   ['devtools', { name: '@wdio/devtools-service', version: wdioVersion }],
-  [
-    'selenium-standalone',
-    { name: '@wdio/selenium-standalone-service', version: wdioVersion },
-  ],
 ]);

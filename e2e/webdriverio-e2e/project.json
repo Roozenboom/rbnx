@@ -5,9 +5,9 @@
   "sourceRoot": "e2e/webdriverio-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nx/plugin:e2e",
+      "executor": "@nx/jest:jest",
+      "dependsOn": ["webdriverio:build"],
       "options": {
-        "target": "webdriverio:build",
         "coverageDirectory": "coverage/e2e/webdriverio-e2e",
         "jestConfig": "e2e/webdriverio-e2e/jest.config.ts"
       }

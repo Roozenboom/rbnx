@@ -40,9 +40,6 @@ describe('webdriverio e2e - mocha, devtools and localhost', () => {
     expect(packageJson.devDependencies['@wdio/jasmine-framework']).toBeFalsy();
     expect(packageJson.devDependencies['@types/jasmine']).toBeFalsy();
     expect(packageJson.devDependencies['@wdio/devtools-service']).toBeTruthy();
-    expect(
-      packageJson.devDependencies['@wdio/selenium-standalone-service']
-    ).toBeFalsy();
 
     const tsConfigJsonPath = joinPathFragments(
       'apps',

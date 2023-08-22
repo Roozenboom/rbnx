@@ -4,7 +4,7 @@ export type Runner = 'local';
 export type Protocol = 'webdriver' | 'devtools';
 export type Framework = 'mocha' | 'jasmine';
 export type Reporters = 'allure' | 'spec' | 'dot' | 'junit' | 'concise';
-export type Services = 'devtools' | 'selenium-standalone';
+export type Services = 'devtools';
 export type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'silent';
 
 export interface WdioOptions {

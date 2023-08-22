@@ -38,10 +38,8 @@ export function normalizeOptions(
   }
 
   if (options.protocol) {
-    options.services = [
-      ...(options.services ?? []),
-      options.protocol === 'devtools' ? 'devtools' : 'selenium-standalone',
-    ];
+    options.services = options.services ?? [];
+    if (options.protocol === 'devtools') options.services.push('devtools');
   }
 
   let timeout = 60000;

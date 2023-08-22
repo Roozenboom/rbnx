@@ -5,10 +5,10 @@ export function normalizeOptions(options: Schema): Schema {
     runner: 'local',
     framework: 'jasmine',
     reporters: ['spec'],
-    services: [
-      ...(options.services ?? []),
-      options.protocol === 'devtools' ? 'devtools' : 'selenium-standalone',
-    ],
+    services:
+      options.protocol === 'devtools'
+        ? [...(options.services ?? []), 'devtools']
+        : [...(options.services ?? [])],
     protocol: options.protocol ?? 'webdriver',
     skipFormat: false,
     ...options,
