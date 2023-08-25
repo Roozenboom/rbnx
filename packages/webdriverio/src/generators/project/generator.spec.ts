@@ -2,7 +2,6 @@ import {
   Tree,
   readProjectConfiguration,
   addProjectConfiguration,
-  joinPathFragments,
 } from '@nx/devkit';
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import generator from './generator';
@@ -48,8 +47,8 @@ describe('project generator', () => {
     };
     await generator(tree, options);
     const config = readProjectConfiguration(tree, 'test-e2e');
-    expect(config.targets.e2e.options.wdioConfig).toBe('wdio.config.ts');
-    const wdioConfigPath = joinPathFragments(config.root, 'wdio.config.ts');
+    const wdioConfigPath = config.targets.e2e.options.wdioConfig;
+    expect(wdioConfigPath).toBe('apps/test-e2e/wdio.config.ts');
     expect(tree.exists(wdioConfigPath)).toBeTruthy();
   });
 

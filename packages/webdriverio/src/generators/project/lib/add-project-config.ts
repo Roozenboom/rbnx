@@ -14,7 +14,7 @@ export function addProjectConfig(tree: Tree, options: NormalizedSchema) {
       e2e: {
         executor: '@rbnx/webdriverio:e2e',
         options: {
-          wdioConfig: 'wdio.config.ts',
+          wdioConfig: `${projectRoot}/wdio.config.ts`,
           ...filterWdioOptions(options),
         },
       },

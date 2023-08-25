@@ -41,8 +41,8 @@ describe('Build Executor', () => {
   it('can run', async () => {
     const output = await runExecutor({ wdioConfig: 'wdio.config.ts' }, context);
     expect(execMock).toHaveBeenCalledWith(
-      'npx wdio wdio.generated.config.ts',
-      expect.objectContaining({ cwd: './apps/test-e2e' }),
+      'npx wdio apps/test-e2e/wdio.generated.config.ts',
+      expect.objectContaining({}),
       expect.any(Function)
     );
     expect(pipe).toHaveBeenCalledTimes(1);
@@ -59,8 +59,8 @@ describe('Build Executor', () => {
       context
     );
     expect(execMock).toHaveBeenCalledWith(
-      'npx wdio wdio.generated.config.ts',
-      expect.objectContaining({ cwd: './apps/test-e2e' }),
+      'npx wdio apps/test-e2e/wdio.generated.config.ts',
+      expect.objectContaining({}),
       expect.any(Function)
     );
     expect(pipe).toHaveBeenCalledTimes(1);
@@ -78,8 +78,8 @@ describe('Build Executor', () => {
       context
     );
     expect(execMock).toHaveBeenCalledWith(
-      'npx wdio wdio.generated.config.ts',
-      expect.objectContaining({ cwd: './apps/test-e2e' }),
+      'npx wdio apps/test-e2e/wdio.generated.config.ts',
+      expect.objectContaining({}),
       expect.any(Function)
     );
     expect(pipe).toHaveBeenCalledTimes(1);
@@ -95,8 +95,8 @@ describe('Build Executor', () => {
       context
     );
     expect(execMock).toHaveBeenCalledWith(
-      'npx wdio wdio.generated.config.ts --spec=src/e2e/test.spec.ts',
-      expect.objectContaining({ cwd: './apps/test-e2e' }),
+      'npx wdio apps/test-e2e/wdio.generated.config.ts --spec=src/e2e/test.spec.ts',
+      expect.objectContaining({}),
       expect.any(Function)
     );
     expect(pipe).toHaveBeenCalledTimes(1);
@@ -113,8 +113,8 @@ describe('Build Executor', () => {
       context
     );
     expect(execMock).toHaveBeenCalledWith(
-      'npx wdio wdio.generated.config.ts --suite=test',
-      expect.objectContaining({ cwd: './apps/test-e2e' }),
+      'npx wdio apps/test-e2e/wdio.generated.config.ts --suite=test',
+      expect.objectContaining({}),
       expect.any(Function)
     );
     expect(pipe).toHaveBeenCalledTimes(1);
@@ -130,8 +130,8 @@ describe('Build Executor', () => {
       context
     );
     expect(execMock).toHaveBeenCalledWith(
-      'npx wdio wdio.generated.config.ts',
-      expect.objectContaining({ cwd: './apps/test-e2e' }),
+      'npx wdio apps/test-e2e/wdio.generated.config.ts',
+      expect.objectContaining({}),
       expect.any(Function)
     );
     expect(pipe).toHaveBeenCalledTimes(1);

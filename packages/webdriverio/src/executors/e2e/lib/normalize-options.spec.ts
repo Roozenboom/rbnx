@@ -3,6 +3,11 @@ import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import { normalizeOptions } from './normalize-options';
 import type { Schema } from '../schema';
 
+jest.mock('@nx/devkit', () => ({
+  ...jest.requireActual('@nx/devkit'),
+  workspaceRoot: '//Users/root',
+}));
+
 describe('normalize options', () => {
   let tree: Tree;
   const options: Schema = {
@@ -35,8 +40,6 @@ describe('normalize options', () => {
       './apps/test-e2e/wdio.config.ts',
       `export const config: { framework:'jasmine' }`
     );
-
-    console.log(tree.exists('./apps/test-e2e/wdio.config.ts'));
   });
 
   it('should normalize options', async () => {
@@ -54,47 +57,31 @@ describe('normalize options', () => {
     expect(output.timeout).toBeGreaterThan(60000);
   });
 
-  it('should normalize relative wdioConfig paths', async () => {
-    const output1 = normalizeOptions(
-      tree,
-      { ...options, wdioConfig: 'config/wdio.config.ts' },
-      context
-    );
-    const output2 = normalizeOptions(
-      tree,
-      { ...options, wdioConfig: './config/wdio.config.ts' },
-      context
-    );
-    const output3 = normalizeOptions(
-      tree,
-      { ...options, wdioConfig: '../../config/wdio.config.ts' },
-      context
-    );
-    const output4 = normalizeOptions(
-      tree,
-      { ...options, wdioConfig: '.wdio.config.ts' },
-      context
-    );
-    const output5 = normalizeOptions(
-      tree,
-      { ...options, wdioConfig: '.config/wdio.config.ts' },
-      context
-    );
+  it('should normalize wdioConfig paths', () => {
+    const wdioConfigPaths = [
+      { in: 'wdio.config.ts', out: './wdio.config' },
+      { in: 'config/wdio.config.ts', out: './config/wdio.config' },
+      { in: './config/wdio.config.ts', out: './config/wdio.config' },
+      { in: 'apps/test-e2e/wdio.config.ts', out: './wdio.config' },
+      {
+        in: '../../apps/test-e2e/config/wdio.config.ts',
+        out: './config/wdio.config',
+      },
+      {
+        in: '../../apps/another-test-e2e/config/wdio.config.ts',
+        out: './../another-test-e2e/config/wdio.config',
+      },
+      {
+        in: '//Users/root/apps/another-test-e2e/config/wdio.config.ts',
+        out: './../another-test-e2e/config/wdio.config',
+      },
+    ];
 
-    expect(output1.baseConfigPath).toEqual('./config/wdio.config');
-    expect(output2.baseConfigPath).toEqual('./config/wdio.config');
-    expect(output3.baseConfigPath).toEqual('../../config/wdio.config');
-    expect(output4.baseConfigPath).toEqual('./.wdio.config');
-    expect(output5.baseConfigPath).toEqual('./.config/wdio.config');
-  });
-
-  it('should normalize absolute wdioConfig paths', async () => {
-    const output = normalizeOptions(
-      tree,
-      { ...options, wdioConfig: '/config/wdio.config.ts' },
-      context
-    );
-
-    expect(output.baseConfigPath).toEqual('/config/wdio.config');
+    for (const { in: wdioConfig, out } of wdioConfigPaths) {
+      expect(
+        normalizeOptions(tree, { ...options, wdioConfig }, context)
+          .baseConfigPath
+      ).toEqual(out);
+    }
   });
 });

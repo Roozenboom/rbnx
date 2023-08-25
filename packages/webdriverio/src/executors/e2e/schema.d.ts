@@ -12,7 +12,6 @@ export interface Schema extends WdioOptions {
 }
 
 export interface NormalizedSchema extends Schema {
-  configFile: string;
   configPath: string;
   baseConfigModuleName: string;
   baseConfigPath: string;
