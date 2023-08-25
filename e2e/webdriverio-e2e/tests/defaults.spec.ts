@@ -55,13 +55,15 @@ describe('webdriverio e2e - defaults', () => {
     expect(() => checkFilesExist(projectJsonPath)).not.toThrow();
 
     const projectJson = readJson(projectJsonPath);
-    expect(
-      projectJson.targets.e2e.executor === '@rbnx/webdriverio:e2e'
-    ).toBeTruthy();
+    expect(projectJson.targets.e2e.executor).toBe('@rbnx/webdriverio:e2e');
 
-    expect(
-      projectJson.targets.e2e.options.wdioConfig === 'wdio.config.ts'
-    ).toBeTruthy();
+    const wdioConfigPath = joinPathFragments(
+      'apps',
+      e2eProject,
+      'wdio.config.ts'
+    );
+    expect(projectJson.targets.e2e.options.wdioConfig).toBe(wdioConfigPath);
+    expect(() => checkFilesExist(wdioConfigPath)).not.toThrow();
 
     const tsConfigJsonPath = joinPathFragments(
       'apps',

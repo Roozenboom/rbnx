@@ -12,15 +12,15 @@ import { unlink } from 'node:fs/promises';
 import type { NormalizedSchema } from '../schema';
 
 export async function runWdio(options: NormalizedSchema) {
-  const { projectRoot, configFile, spec, suite, watch } = options;
+  const { configPath, spec, suite, watch } = options;
 
-  let command = `${getPackageManagerCommand().exec} wdio ${configFile}`;
+  let command = `${getPackageManagerCommand().exec} wdio ${configPath}`;
   if (spec) command += ` --spec=${spec}`;
   if (suite) command += ` --suite=${suite}`;
   if (watch) command += ` --watch`;
 
   await new Promise((resolve, reject) => {
-    exec(command, { cwd: projectRoot }, (error, stdout, stderr) => {
+    exec(command, {}, (error, stdout, stderr) => {
       error ? reject(error) : resolve({ stdout, stderr });
     }).stdout.pipe(process.stdout);
 

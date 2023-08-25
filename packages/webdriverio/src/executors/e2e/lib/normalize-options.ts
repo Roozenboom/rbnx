@@ -1,14 +1,15 @@
 import {
-  ExecutorContext,
   joinPathFragments,
   offsetFromRoot,
-  Tree,
+  workspaceRoot,
+  type ExecutorContext,
+  type Tree,
 } from '@nx/devkit';
-import Path from 'node:path';
+import path from 'node:path';
 import {
   capabilitiesFilter,
-  Framework,
   readPropertyFromConfig,
+  type Framework,
 } from '../../../wdio';
 import type { NormalizedSchema, Schema } from '../schema';
 
@@ -21,8 +22,7 @@ export function normalizeOptions(
   const projectRoot =
     context.projectsConfigurations.projects[context.projectName]?.root ?? '';
 
-  const configFile = 'wdio.generated.config.ts';
-  const configPath = joinPathFragments(projectRoot, configFile);
+  const configPath = joinPathFragments(projectRoot, 'wdio.generated.config.ts');
 
   const baseConfigModuleName = options.wdioConfig
     ? 'config as wdioConfig'
@@ -30,15 +30,22 @@ export function normalizeOptions(
 
   let baseConfigPath: string;
   if (options.wdioConfig) {
-    const parsedPath = Path.parse(options.wdioConfig);
-    baseConfigPath = joinPathFragments(parsedPath.dir, parsedPath.name);
-    if (!Path.isAbsolute(options.wdioConfig)) {
-      if (
-        !(baseConfigPath.startsWith('./') || baseConfigPath.startsWith('../'))
-      ) {
-        baseConfigPath = `./${baseConfigPath}`;
-      }
-    }
+    const isAbsolute = path.isAbsolute(options.wdioConfig);
+
+    const parsedPath = path.parse(
+      tree.exists(options.wdioConfig) || isAbsolute
+        ? options.wdioConfig
+        : joinPathFragments(projectRoot, options.wdioConfig)
+    );
+
+    const from = isAbsolute
+      ? joinPathFragments(workspaceRoot, projectRoot)
+      : projectRoot;
+
+    baseConfigPath = `./${joinPathFragments(
+      path.relative(from, parsedPath.dir),
+      parsedPath.name
+    )}`;
   } else {
     baseConfigPath = joinPathFragments(
       offsetFromRoot(projectRoot),
@@ -69,7 +76,6 @@ export function normalizeOptions(
 
   return {
     ...options,
-    configFile,
     configPath,
     baseConfigModuleName,
     baseConfigPath,
