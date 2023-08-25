@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/roozenboom/rbnx/compare/v1.5.0...v1.5.1) (2023-08-25)
+
+
+### Bug Fixes
+
+* use wdio configPath relative from workspace root to run wdio ([28acfaa](https://github.com/roozenboom/rbnx/commit/28acfaa4b20e096138a1f0258b10267cc5bee615))
+
 # [1.5.0](https://github.com/roozenboom/rbnx/compare/v1.4.0...v1.5.0) (2023-08-22)
 
 
