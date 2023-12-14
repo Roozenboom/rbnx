@@ -4,6 +4,9 @@ tmp
 /out-tsc
 /coverage
 
+# cache
+.nx/cache
+
 # dependencies
 node_modules
 yarn-error.log

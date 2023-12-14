@@ -21,9 +21,6 @@ const context = {
       },
     },
   },
-  nxJsonConfiguration: {
-    npmScope: 'test',
-  },
   isVerbose: true,
   cwd: '/root',
 };

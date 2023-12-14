@@ -26,9 +26,6 @@ describe('normalize options', () => {
         },
       },
     },
-    nxJsonConfiguration: {
-      npmScope: 'test',
-    },
     isVerbose: true,
     cwd: '/root',
   };

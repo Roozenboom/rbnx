@@ -26,7 +26,7 @@ describe('start dev server', () => {
       {
         root: '',
         isVerbose: false,
-        workspace: { version: 1, projects: {}, npmScope: '' },
+        workspace: { version: 1, projects: {} },
         cwd: '',
       }
     );
@@ -43,7 +43,7 @@ describe('start dev server', () => {
       {
         root: '',
         isVerbose: false,
-        workspace: { version: 1, projects: {}, npmScope: '' },
+        workspace: { version: 1, projects: {} },
         cwd: '',
       }
     );
@@ -66,7 +66,7 @@ describe('start dev server', () => {
     const context = {
       root: '',
       isVerbose: false,
-      workspace: { version: 1, projects: {}, npmScope: '' },
+      workspace: { version: 1, projects: {} },
       cwd: '',
     };
 
@@ -110,7 +110,7 @@ describe('start dev server', () => {
         {
           root: '',
           isVerbose: false,
-          workspace: { version: 1, projects: {}, npmScope: '' },
+          workspace: { version: 1, projects: {} },
           cwd: '',
         }
       )

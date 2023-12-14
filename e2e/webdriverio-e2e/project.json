@@ -9,7 +9,8 @@
       "dependsOn": ["webdriverio:build"],
       "options": {
         "coverageDirectory": "coverage/e2e/webdriverio-e2e",
-        "jestConfig": "e2e/webdriverio-e2e/jest.config.ts"
+        "jestConfig": "e2e/webdriverio-e2e/jest.config.ts",
+        "passWithNoTests": false
       }
     }
   },
