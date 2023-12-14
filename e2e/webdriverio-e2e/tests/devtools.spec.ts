@@ -20,7 +20,7 @@ describe('webdriverio e2e - mocha, devtools and localhost', () => {
     ensureNxProject('@rbnx/webdriverio', 'dist/packages/webdriverio');
     await runCommandAsync(`npm install --dev @nx/react@latest`);
     await runNxCommandAsync(
-      `generate @nx/react:app ${project} --e2eTestRunner=none --linter=eslint --bundler vite`
+      `generate @nx/react:app ${project} --directory=apps/${project} --projectNameAndRootFormat=as-provided --e2eTestRunner=none --linter=eslint --bundler vite`
     );
   }, 100000);
 

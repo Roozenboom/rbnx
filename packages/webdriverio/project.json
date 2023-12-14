@@ -37,29 +37,14 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "packages/webdriverio/**/*.ts",
-          "packages/webdriverio/generators.json",
-          "packages/webdriverio/executors.json",
-          "packages/webdriverio/package.json"
-        ]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "packages/webdriverio/jest.config.ts",
-        "coverageDirectory": "coverage/webdriverio",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "coverageDirectory": "coverage/webdriverio"
       }
     },
     "release": {

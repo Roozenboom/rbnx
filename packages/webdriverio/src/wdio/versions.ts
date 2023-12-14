@@ -3,9 +3,9 @@ export type Package = {
   version: string;
 };
 
-const wdioVersion = '^8.15.0';
-const jasmineTypesVersion = '^4.3.5';
-const tsNodeVersion = '10.9.1';
+const wdioVersion = '^8.24.0';
+const jasmineTypesVersion = '^5.1.0';
+const tsNodeVersion = '10.9.2';
 
 export const packages = new Map<string, Package>([
   ['cli', { name: '@wdio/cli', version: wdioVersion }],
