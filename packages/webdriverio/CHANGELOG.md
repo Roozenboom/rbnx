@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/roozenboom/rbnx/compare/v1.5.1...v1.6.0) (2023-12-14)
+
+
+### Features
+
+* update to nx 17.2.4 ([35a6b37](https://github.com/roozenboom/rbnx/commit/35a6b373c05f6dc4d50cfaa7ac4238a7ee63f40a))
+
 ## [1.5.1](https://github.com/roozenboom/rbnx/compare/v1.5.0...v1.5.1) (2023-08-25)
 
 
