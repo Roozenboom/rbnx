@@ -35,7 +35,7 @@ describe('normalize options', () => {
 
     tree.write(
       './apps/test-e2e/wdio.config.ts',
-      `export const config: { framework:'jasmine' }`
+      `export const config: { framework:'jasmine' }`,
     );
   });
 
@@ -77,7 +77,7 @@ describe('normalize options', () => {
     for (const { in: wdioConfig, out } of wdioConfigPaths) {
       expect(
         normalizeOptions(tree, { ...options, wdioConfig }, context)
-          .baseConfigPath
+          .baseConfigPath,
       ).toEqual(out);
     }
   });

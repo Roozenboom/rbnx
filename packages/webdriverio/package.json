@@ -1,6 +1,6 @@
 {
   "name": "@rbnx/webdriverio",
-  "version": "1.6.0",
+  "version": "1.5.1",
   "description": "webdriverio plugin for nx",
   "author": "Richard Roozenboom",
   "license": "MIT",
@@ -30,7 +30,7 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "peerDependencies": {
-    "@nx/devkit": "^16.0.0",
+    "@nx/devkit": "^16.0.0 || ^17.0.0",
     "@wdio/cli": "^8.8.0"
   }
 }

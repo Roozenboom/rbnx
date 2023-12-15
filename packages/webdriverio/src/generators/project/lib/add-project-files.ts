@@ -38,7 +38,7 @@ export function addProjectFiles(tree: Tree, options: NormalizedSchema) {
     tree,
     joinPathFragments(__dirname, '..', 'files'),
     projectRoot,
-    templateOptions
+    templateOptions,
   );
 }
 

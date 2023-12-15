@@ -7,7 +7,7 @@ import type { Schema } from './schema';
 
 export default async function runExecutor(
   options: Schema,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   const tree: Tree = new FsTree(workspaceRoot, false);
 

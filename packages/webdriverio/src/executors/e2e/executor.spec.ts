@@ -40,7 +40,7 @@ describe('Build Executor', () => {
     expect(execMock).toHaveBeenCalledWith(
       'npx wdio apps/test-e2e/wdio.generated.config.ts',
       expect.objectContaining({}),
-      expect.any(Function)
+      expect.any(Function),
     );
     expect(pipe).toHaveBeenCalledTimes(1);
     expect(output.success).toBe(true);
@@ -53,12 +53,12 @@ describe('Build Executor', () => {
         outputDir: './tmp',
         browsers: ['firefox'],
       },
-      context
+      context,
     );
     expect(execMock).toHaveBeenCalledWith(
       'npx wdio apps/test-e2e/wdio.generated.config.ts',
       expect.objectContaining({}),
-      expect.any(Function)
+      expect.any(Function),
     );
     expect(pipe).toHaveBeenCalledTimes(1);
     expect(output.success).toBe(true);
@@ -72,12 +72,12 @@ describe('Build Executor', () => {
         browsers: ['chrome', 'firefox'],
         headless: true,
       },
-      context
+      context,
     );
     expect(execMock).toHaveBeenCalledWith(
       'npx wdio apps/test-e2e/wdio.generated.config.ts',
       expect.objectContaining({}),
-      expect.any(Function)
+      expect.any(Function),
     );
     expect(pipe).toHaveBeenCalledTimes(1);
     expect(output.success).toBe(true);
@@ -89,12 +89,12 @@ describe('Build Executor', () => {
         wdioConfig: 'wdio.config.ts',
         spec: 'src/e2e/test.spec.ts',
       },
-      context
+      context,
     );
     expect(execMock).toHaveBeenCalledWith(
       'npx wdio apps/test-e2e/wdio.generated.config.ts --spec=src/e2e/test.spec.ts',
       expect.objectContaining({}),
-      expect.any(Function)
+      expect.any(Function),
     );
     expect(pipe).toHaveBeenCalledTimes(1);
     expect(output.success).toBe(true);
@@ -107,12 +107,12 @@ describe('Build Executor', () => {
         outputDir: './tmp',
         suite: 'test',
       },
-      context
+      context,
     );
     expect(execMock).toHaveBeenCalledWith(
       'npx wdio apps/test-e2e/wdio.generated.config.ts --suite=test',
       expect.objectContaining({}),
-      expect.any(Function)
+      expect.any(Function),
     );
     expect(pipe).toHaveBeenCalledTimes(1);
     expect(output.success).toBe(true);
@@ -124,12 +124,12 @@ describe('Build Executor', () => {
         specs: ['src/e2e/**/*.spec.ts'],
         protocol: 'devtools',
       },
-      context
+      context,
     );
     expect(execMock).toHaveBeenCalledWith(
       'npx wdio apps/test-e2e/wdio.generated.config.ts',
       expect.objectContaining({}),
-      expect.any(Function)
+      expect.any(Function),
     );
     expect(pipe).toHaveBeenCalledTimes(1);
     expect(output.success).toBe(true);
@@ -145,7 +145,7 @@ describe('Build Executor', () => {
     expect(startDevServer).toHaveBeenCalledTimes(1);
     expect(startDevServer).toHaveBeenCalledWith(
       expect.objectContaining(options),
-      context
+      context,
     );
     expect(output.success).toBe(true);
   });

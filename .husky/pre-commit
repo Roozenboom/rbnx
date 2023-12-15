@@ -2,5 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 echo
-echo "\033[1mRuns Prettier on your changed files\033[0m"
-npx pretty-quick --staged
+echo "\033[1mRuns lint-staged on your changed files\033[0m"
+npx lint-staged --allow-empty

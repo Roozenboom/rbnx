@@ -34,7 +34,7 @@ describe('project generator', () => {
     await generator(tree, options);
     const config = readProjectConfiguration(tree, 'test-e2e');
     expect(config.targets.e2e.options.browsers).toEqual(
-      expect.arrayContaining(options.browsers)
+      expect.arrayContaining(options.browsers),
     );
   });
 
@@ -56,9 +56,9 @@ describe('project generator', () => {
     await expect(
       generator(tree, {
         project: 'unknown-project',
-      })
+      }),
     ).rejects.toMatchInlineSnapshot(
-      `"unknown-project is not a valid project in the workspace"`
+      `"unknown-project is not a valid project in the workspace"`,
     );
   });
 });

@@ -20,7 +20,7 @@ describe('webdriverio e2e - mocha, devtools and localhost', () => {
     ensureNxProject('@rbnx/webdriverio', 'dist/packages/webdriverio');
     await runCommandAsync(`npm install --dev @nx/react@latest`);
     await runNxCommandAsync(
-      `generate @nx/react:app ${project} --directory=apps/${project} --projectNameAndRootFormat=as-provided --e2eTestRunner=none --linter=eslint --bundler vite`
+      `generate @nx/react:app ${project} --directory=apps/${project} --projectNameAndRootFormat=as-provided --e2eTestRunner=none --linter=eslint --bundler vite`,
     );
   }, 100000);
 
@@ -30,7 +30,7 @@ describe('webdriverio e2e - mocha, devtools and localhost', () => {
 
   it('should create an e2e project with mocha and devtools protocol', async () => {
     await runNxCommandAsync(
-      `generate @rbnx/webdriverio:project ${project} --framework=mocha --protocol=devtools`
+      `generate @rbnx/webdriverio:project ${project} --framework=mocha --protocol=devtools`,
     );
 
     expect(() => checkFilesExist('package.json')).not.toThrow();
@@ -44,15 +44,15 @@ describe('webdriverio e2e - mocha, devtools and localhost', () => {
     const tsConfigJsonPath = joinPathFragments(
       'apps',
       e2eProject,
-      'tsconfig.json'
+      'tsconfig.json',
     );
     expect(() => checkFilesExist(tsConfigJsonPath)).not.toThrow();
     const tsConfigJson = readJson(tsConfigJsonPath);
     expect(
-      tsConfigJson.compilerOptions.types.includes('@wdio/mocha-framework')
+      tsConfigJson.compilerOptions.types.includes('@wdio/mocha-framework'),
     ).toBeTruthy();
     expect(
-      tsConfigJson.compilerOptions.types.includes('@wdio/devtools-service')
+      tsConfigJson.compilerOptions.types.includes('@wdio/devtools-service'),
     ).toBeTruthy();
   }, 60000);
 
@@ -62,7 +62,7 @@ describe('webdriverio e2e - mocha, devtools and localhost', () => {
       e2eProject,
       'src',
       'e2e',
-      'app.spec.ts'
+      'app.spec.ts',
     );
 
     expect(() => checkFilesExist(appSpecFilePath)).not.toThrow();
@@ -75,14 +75,14 @@ describe('webdriverio e2e - mocha, devtools and localhost', () => {
                 await expect(browser).toHaveTitle('${projectNames.className}');
               });
             });
-            `
+            `,
     );
 
     const result = await runNxCommandAsync(
-      `e2e ${e2eProject} --devServerTarget="${project}:serve:development"`
+      `e2e ${e2eProject} --devServerTarget="${project}:serve:development"`,
     );
     expect(result.stdout).toContain(
-      `Successfully ran target e2e for project ${e2eProject}`
+      `Successfully ran target e2e for project ${e2eProject}`,
     );
   }, 60000);
 });

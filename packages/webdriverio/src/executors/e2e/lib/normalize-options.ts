@@ -16,7 +16,7 @@ import type { NormalizedSchema, Schema } from '../schema';
 export function normalizeOptions(
   tree: Tree,
   options: Schema,
-  context: ExecutorContext
+  context: ExecutorContext,
 ): NormalizedSchema {
   const projectName = context.projectName;
   const projectRoot =
@@ -35,7 +35,7 @@ export function normalizeOptions(
     const parsedPath = path.parse(
       tree.exists(options.wdioConfig) || isAbsolute
         ? options.wdioConfig
-        : joinPathFragments(projectRoot, options.wdioConfig)
+        : joinPathFragments(projectRoot, options.wdioConfig),
     );
 
     const from = isAbsolute
@@ -44,12 +44,12 @@ export function normalizeOptions(
 
     baseConfigPath = `./${joinPathFragments(
       path.relative(from, parsedPath.dir),
-      parsedPath.name
+      parsedPath.name,
     )}`;
   } else {
     baseConfigPath = joinPathFragments(
       offsetFromRoot(projectRoot),
-      'wdio.base.config'
+      'wdio.base.config',
     );
   }
 
@@ -89,7 +89,7 @@ export function normalizeOptions(
 function getFrameWorkFromConfig(
   tree: Tree,
   options: Schema,
-  projectRoot: string
+  projectRoot: string,
 ): Framework {
   if (options.framework) return options.framework;
 
@@ -100,7 +100,7 @@ function getFrameWorkFromConfig(
       const framework = readPropertyFromConfig<Framework>(
         tree,
         configPath,
-        'framework'
+        'framework',
       ).shift();
       if (framework) {
         return framework;
@@ -111,6 +111,6 @@ function getFrameWorkFromConfig(
   return readPropertyFromConfig<Framework>(
     tree,
     'wdio.base.config.ts',
-    'framework'
+    'framework',
   ).shift();
 }
