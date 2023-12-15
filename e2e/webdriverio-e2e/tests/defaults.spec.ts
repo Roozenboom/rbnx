@@ -19,7 +19,7 @@ describe('webdriverio e2e - defaults', () => {
 
     await runCommandAsync(`npm install --dev @nx/react@latest`);
     await runNxCommandAsync(
-      `generate @nx/react:app ${project} --directory=apps/${project} --projectNameAndRootFormat=as-provided --e2eTestRunner=none --linter=eslint --bundler vite`
+      `generate @nx/react:app ${project} --directory=apps/${project} --projectNameAndRootFormat=as-provided --e2eTestRunner=none --linter=eslint --bundler vite`,
     );
   }, 100000);
 
@@ -49,7 +49,7 @@ describe('webdriverio e2e - defaults', () => {
     const projectJsonPath = joinPathFragments(
       'apps',
       e2eProject,
-      'project.json'
+      'project.json',
     );
 
     expect(() => checkFilesExist(projectJsonPath)).not.toThrow();
@@ -60,7 +60,7 @@ describe('webdriverio e2e - defaults', () => {
     const wdioConfigPath = joinPathFragments(
       'apps',
       e2eProject,
-      'wdio.config.ts'
+      'wdio.config.ts',
     );
     expect(projectJson.targets.e2e.options.wdioConfig).toBe(wdioConfigPath);
     expect(() => checkFilesExist(wdioConfigPath)).not.toThrow();
@@ -68,20 +68,20 @@ describe('webdriverio e2e - defaults', () => {
     const tsConfigJsonPath = joinPathFragments(
       'apps',
       e2eProject,
-      'tsconfig.json'
+      'tsconfig.json',
     );
     expect(() => checkFilesExist(tsConfigJsonPath)).not.toThrow();
     const tsConfigJson = readJson(tsConfigJsonPath);
     expect(
-      tsConfigJson.compilerOptions.types.includes('@wdio/globals/types')
+      tsConfigJson.compilerOptions.types.includes('@wdio/globals/types'),
     ).toBeTruthy();
     expect(
-      tsConfigJson.compilerOptions.types.includes('@wdio/jasmine-framework')
+      tsConfigJson.compilerOptions.types.includes('@wdio/jasmine-framework'),
     ).toBeTruthy();
 
     const result = await runNxCommandAsync(`e2e ${e2eProject} --headless`);
     expect(result.stdout).toContain(
-      `Successfully ran target e2e for project ${e2eProject}`
+      `Successfully ran target e2e for project ${e2eProject}`,
     );
   }, 60000);
 });

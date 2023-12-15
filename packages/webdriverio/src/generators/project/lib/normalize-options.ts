@@ -3,7 +3,7 @@ import type { NormalizedSchema, Schema } from '../schema';
 
 export function normalizeOptions(
   tree: Tree,
-  options: Schema
+  options: Schema,
 ): NormalizedSchema {
   const project = names(options.project).fileName;
   const e2eProjectName = project + '-e2e';
@@ -17,7 +17,7 @@ export function normalizeOptions(
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
   const projectRoot = joinPathFragments(
     getWorkspaceLayout(tree).appsDir,
-    projectDirectory
+    projectDirectory,
   );
 
   const parsedTags = options.tags

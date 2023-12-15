@@ -4,14 +4,14 @@ import { createSourceFile, Node, ScriptTarget, SyntaxKind } from 'typescript';
 export function readPropertyFromConfig<T = string>(
   tree: Tree,
   config: string,
-  prop: string
+  prop: string,
 ) {
   if (tree.exists(config)) {
     const source = createSourceFile(
       config,
       tree.read(config, 'utf-8'),
       ScriptTarget.Latest,
-      true
+      true,
     );
 
     const propNode = findNodes(source, SyntaxKind.PropertyAssignment)
@@ -19,7 +19,7 @@ export function readPropertyFromConfig<T = string>(
       .shift();
 
     return findNodes(propNode, SyntaxKind.StringLiteral).map<T>(
-      (node) => node.getText().replace(/['"]/g, '') as T
+      (node) => node.getText().replace(/['"]/g, '') as T,
     );
   }
 }
@@ -27,7 +27,7 @@ export function readPropertyFromConfig<T = string>(
 function findNodes(
   node: Node,
   kind: SyntaxKind | SyntaxKind[],
-  max = Infinity
+  max = Infinity,
 ): Node[] {
   if (!node || max == 0) {
     return [];

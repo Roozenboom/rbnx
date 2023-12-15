@@ -3,7 +3,7 @@ import type { NormalizedSchema } from '../schema';
 
 export async function startDevServer(
   options: NormalizedSchema,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   const { baseUrl, devServerTarget, skipServe } = options;
   if (!devServerTarget || skipServe) {
@@ -18,7 +18,7 @@ export async function startDevServer(
   }>(target, {}, context)) {
     if (!output.success) {
       throw new Error(
-        `Could not start dev server for ${target.project} project`
+        `Could not start dev server for ${target.project} project`,
       );
     }
     return baseUrl || (output.baseUrl as string);

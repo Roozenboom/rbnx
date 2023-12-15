@@ -28,7 +28,7 @@ describe('start dev server', () => {
         isVerbose: false,
         workspace: { version: 1, projects: {} },
         cwd: '',
-      }
+      },
     );
 
     expect(runExecutor).not.toHaveBeenCalled();
@@ -45,7 +45,7 @@ describe('start dev server', () => {
         isVerbose: false,
         workspace: { version: 1, projects: {} },
         cwd: '',
-      }
+      },
     );
 
     expect(runExecutor).not.toHaveBeenCalled();
@@ -56,7 +56,7 @@ describe('start dev server', () => {
   it('should return the base url from results', async () => {
     const baseUrl = 'base-url';
     (runExecutor as jest.Mock).mockResolvedValue(
-      promiseToIterator({ success: true, baseUrl })
+      promiseToIterator({ success: true, baseUrl }),
     );
     (parseTargetString as jest.Mock).mockReturnValue({
       project: 'project',
@@ -75,7 +75,7 @@ describe('start dev server', () => {
         skipServe: false,
         devServerTarget: 'project:target:configuration',
       } as NormalizedSchema,
-      context
+      context,
     );
 
     expect(result).toEqual(baseUrl);
@@ -88,13 +88,13 @@ describe('start dev server', () => {
         configuration: 'configuration',
       },
       {},
-      context
+      context,
     );
   });
 
   it('should throw an error when executor fails', async () => {
     (runExecutor as jest.Mock).mockResolvedValue(
-      promiseToIterator({ success: false })
+      promiseToIterator({ success: false }),
     );
     (parseTargetString as jest.Mock).mockReturnValue({
       project: 'unknown',
@@ -112,10 +112,10 @@ describe('start dev server', () => {
           isVerbose: false,
           workspace: { version: 1, projects: {} },
           cwd: '',
-        }
-      )
+        },
+      ),
     ).rejects.toThrowError(
-      new Error('Could not start dev server for unknown project')
+      new Error('Could not start dev server for unknown project'),
     );
   });
 });

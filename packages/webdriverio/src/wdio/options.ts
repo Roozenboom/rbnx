@@ -41,7 +41,7 @@ const wdioOpts: wdioOptsKeys[] = ['browsers', 'headless', 'protocol'];
 export function filterWdioOptions(obj): WdioOptions {
   return Object.fromEntries(
     Object.entries(obj).filter(([key]: [wdioOptsKeys, unknown]) =>
-      wdioOpts.includes(key)
-    )
+      wdioOpts.includes(key),
+    ),
   );
 }

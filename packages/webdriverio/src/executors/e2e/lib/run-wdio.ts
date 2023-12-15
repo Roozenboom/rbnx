@@ -33,7 +33,7 @@ export async function runWdio(options: NormalizedSchema) {
 
 export async function generateWdioConfig(
   tree: Tree,
-  options: NormalizedSchema
+  options: NormalizedSchema,
 ) {
   const { projectRoot } = options;
 
@@ -44,7 +44,7 @@ export async function generateWdioConfig(
     {
       tmpl: '',
       options,
-    }
+    },
   );
   await formatFiles(tree);
   flushChanges(workspaceRoot, tree.listChanges());
